@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>순환기내과 병동 영어회화 퀴즈 | Cardiology Nursing English Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #1B3A6B;
+    --teal:   #2E7D8C;
+    --teal-l: #EAF4F6;
+    --teal-m: #9FC8D0;
+    --accent: #E8523A;
+    --gold:   #C9952A;
+    --gold-l: #FEF3DF;
+    --green:  #1D9E75;
+    --green-l:#D8F2EA;
+    --red-l:  #FAECE7;
+    --gray-1: #F4F6F8;
+    --gray-2: #E8ECF0;
+    --gray-3: #B0BAC4;
+    --gray-4: #6B7785;
+    --gray-5: #343C47;
+    --white:  #FFFFFF;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(27,58,107,.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    background: var(--gray-1);
+    min-height: 100vh;
+    color: var(--gray-5);
+  }
+
+  /* ── layout ── */
+  .shell {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  /* ── header ── */
+  .site-header {
+    padding: 28px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-mark svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; }
+  .site-title { font-size: 15px; font-weight: 600; color: var(--navy); line-height: 1.3; }
+  .site-sub   { font-size: 12px; color: var(--gray-4); margin-top: 1px; }
+
+  /* ── stat row ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .stat-label { font-size: 11px; color: var(--gray-4); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; }
+  .stat-val   { font-size: 22px; font-weight: 600; color: var(--navy); font-family: 'DM Mono', monospace; }
+  .stat-val.green { color: var(--green); }
+  .stat-val.accent{ color: var(--accent); }
+
+  /* ── progress ── */
+  .progress-wrap {
+    background: var(--gray-2);
+    border-radius: 99px;
+    height: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--teal), var(--navy));
+    transition: width .5s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ── chapter badge ── */
+  .chapter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--teal);
+    background: var(--teal-l);
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-bottom: 14px;
+    letter-spacing: .03em;
+  }
+  .chapter-badge::before {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  /* ── question card ── */
+  .q-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--navy);
+  }
+  .q-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-4);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .q-korean {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+
+  /* ── answer zone ── */
+  .answer-zone {
+    min-height: 60px;
+    border: 1.5px dashed var(--gray-3);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 14px;
+    background: var(--white);
+    transition: border-color .25s, background .25s;
+    cursor: default;
+  }
+  .answer-zone.correct { border-color: var(--green); background: var(--green-l); }
+  .answer-zone.wrong   { border-color: var(--accent); background: var(--red-l); }
+  .answer-zone-hint    { font-size: 13px; color: var(--gray-3); pointer-events: none; }
+
+  /* ── word chips ── */
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .word-chip {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-2);
+    background: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-5);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color .15s, background .15s, transform .1s, opacity .2s, box-shadow .15s;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .word-chip:hover:not(.used) {
+    border-color: var(--teal);
+    background: var(--teal-l);
+    color: var(--teal);
+    box-shadow: 0 2px 8px rgba(46,125,140,.15);
+    transform: translateY(-1px);
+  }
+  .word-chip:active:not(.used) { transform: translateY(0) scale(.97); }
+  .word-chip.used { opacity: .2; pointer-events: none; }
+
+  .answer-chip {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s, transform .1s;
+    box-shadow: 0 1px 4px rgba(27,58,107,.2);
+  }
+  .answer-chip:hover { background: var(--accent); transform: translateY(-1px); }
+  .answer-chip:active { transform: scale(.97); }
+
+  /* ── buttons ── */
+  .btn-row { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-2);
+    background: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--gray-5);
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .btn:hover { border-color: var(--gray-3); background: var(--gray-1); }
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+  .btn-primary:hover { background: #142D52; border-color: #142D52; }
+  .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-reset {
+    color: var(--gray-4);
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+  .btn-next {
+    background: var(--green);
+    color: var(--white);
+    border-color: var(--green);
+  }
+  .btn-next:hover { background: #178a63; border-color: #178a63; }
+
+  /* ── feedback ── */
+  .feedback {
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    display: none;
+    margin-bottom: 4px;
+  }
+  .feedback.show-correct { display: block; background: var(--green-l); color: #0e6b4e; border-left: 4px solid var(--green); }
+  .feedback.show-wrong   { display: block; background: var(--red-l);   color: #9b3a25; border-left: 4px solid var(--accent); }
+  .feedback .answer-text { font-family: 'DM Mono', monospace; font-size: 13px; margin-top: 4px; color: var(--navy); display: block; }
+
+  /* ── finish screen ── */
+  #finish-view { display: none; }
+  .finish-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 40px 32px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .finish-icon { font-size: 52px; margin-bottom: 12px; }
+  .finish-card h2 { font-size: 24px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .finish-card .sub { font-size: 14px; color: var(--gray-4); margin-bottom: 24px; }
+  .big-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .score-bar-wrap { background: var(--gray-2); border-radius: 99px; height: 8px; margin: 12px 0 24px; }
+  .score-bar-fill { height: 8px; border-radius: 99px; background: linear-gradient(90deg, var(--teal), var(--green)); transition: width 1s .3s; }
+  .finish-msg {
+    font-size: 15px;
+    color: var(--gray-4);
+    margin-bottom: 28px;
+    line-height: 1.6;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .result-cell {
+    background: var(--gray-1);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .result-cell .rl { font-size: 11px; color: var(--gray-4); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+  .result-cell .rv { font-size: 20px; font-weight: 600; font-family: 'DM Mono', monospace; }
+  .rv.green { color: var(--green); }
+  .rv.red   { color: var(--accent); }
+
+  /* ── chapter select ── */
+  #start-view { display: none; }
+  .start-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 32px 28px;
+    margin-top: 12px;
+  }
+  .start-card h2 { font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .start-card p  { font-size: 14px; color: var(--gray-4); margin-bottom: 24px; line-height: 1.5; }
+  .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .filter-chip {
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-2);
+    background: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-4);
+    cursor: pointer;
+    user-select: none;
+    transition: all .15s;
+  }
+  .filter-chip.active {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+  .filter-chip:hover:not(.active) { border-color: var(--teal); color: var(--teal); }
+  .count-note { font-size: 13px; color: var(--gray-4); margin-bottom: 20px; }
+  .count-note strong { color: var(--navy); }
+
+  /* ── streak badge ── */
+  .streak-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--gold-l);
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-left: auto;
+  }
+  .streak-badge.show { display: inline-flex; }
+
+  /* ── responsive ── */
+  @media (max-width: 480px) {
+    .q-korean { font-size: 17px; }
+    .word-chip, .answer-chip { font-size: 13px; padding: 7px 11px; }
+    .stat-val { font-size: 18px; }
+    .big-score { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z"/></svg>
+    </div>
+    <div>
+      <div class="site-title">Cardiology Nursing English Quiz</div>
+      <div class="site-sub">순환기내과 병동 영어회화 연습 — 25병동</div>
+    </div>
+  </header>
+
+  <!-- Start / chapter select view -->
+  <div id="start-view">
+    <div class="start-card">
+      <h2>챕터 선택</h2>
+      <p>연습할 챕터를 선택하세요. 전체 또는 원하는 카테고리만 골라 10문제씩 풀 수 있어요.</p>
+      <div class="filter-row" id="filter-row"></div>
+      <div class="count-note" id="count-note"></div>
+      <button class="btn btn-primary" onclick="startQuiz()" style="width:100%; padding:14px; font-size:15px;">시작하기 →</button>
+    </div>
+  </div>
+
+  <!-- Quiz view -->
+  <div id="quiz-view">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+      <div style="font-size:13px; color:var(--gray-4);">문제 <strong id="q-num" style="color:var(--navy);">1</strong> / <span id="q-total">10</span></div>
+      <div class="streak-badge" id="streak-badge">🔥 <span id="streak-num">0</span> 연속 정답</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">점수</div>
+        <div class="stat-val green" id="score-disp">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">정답</div>
+        <div class="stat-val green" id="correct-disp">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">오답</div>
+        <div class="stat-val accent" id="wrong-disp">0</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-fill" id="prog-bar" style="width:0%"></div>
+    </div>
+
+    <div class="chapter-badge" id="chapter-badge">Chapter 01</div>
+
+    <div class="q-card">
+      <div class="q-label">다음 문장을 영어로 완성하세요</div>
+      <div class="q-korean" id="q-korean">loading...</div>
+    </div>
+
+    <div class="answer-zone" id="answer-zone">
+      <span class="answer-zone-hint">↓ 아래 단어를 순서대로 클릭하세요</span>
+    </div>
+
+    <div class="word-bank" id="word-bank"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btn-check" onclick="checkAnswer()">확인하기 ✓</button>
+      <button class="btn btn-next" id="btn-next" onclick="nextQ()" style="display:none">다음 문제 →</button>
+      <button class="btn btn-reset" onclick="resetAnswer()">↺ 다시</button>
+      <button class="btn" onclick="goToStart()" style="font-size:12px; color:var(--gray-4); margin-left:auto;">챕터 변경</button>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+  </div>
+
+  <!-- Finish view -->
+  <div id="finish-view">
+    <div class="finish-card">
+      <div class="finish-icon" id="finish-icon">🏆</div>
+      <h2>퀴즈 완료!</h2>
+      <div class="sub">10문제를 모두 풀었어요</div>
+      <div class="big-score" id="final-score">0 / 10</div>
+      <div class="score-bar-wrap"><div class="score-bar-fill" id="score-bar" style="width:0%"></div></div>
+      <div class="result-grid">
+        <div class="result-cell"><div class="rl">정답</div><div class="rv green" id="res-correct">0</div></div>
+        <div class="result-cell"><div class="rl">오답</div><div class="rv red"   id="res-wrong">0</div></div>
+      </div>
+      <div class="finish-msg" id="finish-msg"></div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+        <button class="btn btn-primary" onclick="restartSame()" style="padding:12px 24px;">같은 챕터로 다시</button>
+        <button class="btn" onclick="goToStart()" style="padding:12px 24px;">챕터 선택</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /shell -->
+
+<script>
+const ALL_QS = [
+  // ── Ch 01 입원 접수 ──────────────────────────────────────────────
+  { ch:'Ch 01 입원', ko:'안녕하세요, 25병동에 오신 것을 환영합니다.',                           en:'Hello welcome to Ward 25' },
+  { ch:'Ch 01 입원', ko:'저는 오늘 담당 간호사입니다.',                                        en:'I will be your nurse today' },
+  { ch:'Ch 01 입원', ko:'성함과 생년월일을 확인해도 될까요?',                                   en:'May I confirm your name and date of birth please' },
+  { ch:'Ch 01 입원', ko:'지금 병실로 안내해 드리겠습니다.',                                     en:'I will take you to your room now' },
+  { ch:'Ch 01 입원', ko:'콜벨은 여기 있습니다. 도움이 필요하시면 눌러주세요.',                   en:'The call bell is right here please press it if you need help' },
+  { ch:'Ch 01 입원', ko:'면회 시간은 오후 1시부터 8시까지입니다.',                               en:'Visiting hours are from 1 PM to 8 PM' },
+  { ch:'Ch 01 입원', ko:'약물이나 음식 알레르기가 있으신가요?',                                  en:'Do you have any allergies to medications or food' },
+  { ch:'Ch 01 입원', ko:'입원 중 복용 중인 약이 있으면 알려주세요.',                              en:'Please let me know if you are taking any medications at home' },
+  { ch:'Ch 01 입원', ko:'식사는 하루 세 번 제공됩니다.',                                        en:'Meals are served three times a day' },
+  { ch:'Ch 01 입원', ko:'화장실은 복도 오른쪽에 있습니다.',                                     en:'The bathroom is on the right side of the hallway' },
+
+  // ── Ch 02 활력징후 ───────────────────────────────────────────────
+  { ch:'Ch 02 활력징후', ko:'활력징후를 측정하겠습니다. 괜찮으세요?',                             en:'I need to check your vital signs is that okay' },
+  { ch:'Ch 02 활력징후', ko:'먼저 혈압을 측정하겠습니다.',                                       en:'I will check your blood pressure first' },
+  { ch:'Ch 02 활력징후', ko:'왼쪽 팔을 뻗고 편하게 계세요.',                                    en:'Please extend your left arm and relax' },
+  { ch:'Ch 02 활력징후', ko:'맥박을 측정하겠습니다. 잠시 움직이지 마세요.',                       en:'Let me count your pulse please keep still for a moment' },
+  { ch:'Ch 02 활력징후', ko:'체온을 재겠습니다. 입을 벌려주세요.',                               en:'I will take your temperature please open your mouth' },
+  { ch:'Ch 02 활력징후', ko:'산소포화도를 측정하겠습니다. 손가락에 끼워드릴게요.',                 en:'I will measure your oxygen saturation I will clip this onto your finger' },
+  { ch:'Ch 02 활력징후', ko:'혈압이 138에 88입니다. 차트에 기록하겠습니다.',                      en:'Your blood pressure is 138 over 88 I will note that in your chart' },
+  { ch:'Ch 02 활력징후', ko:'체온이 38.2도입니다. 의사에게 보고하겠습니다.',                      en:'Your temperature is 38.2 degrees I will report this to the doctor' },
+
+  // ── Ch 02 라운딩 ─────────────────────────────────────────────────
+  { ch:'Ch 02 라운딩', ko:'안녕하세요, 라운딩 중입니다. 오늘 기분은 어떠세요?',                   en:'Hi I am doing my rounds how are you feeling today' },
+  { ch:'Ch 02 라운딩', ko:'0에서 10점 중 불편함을 몇 점으로 표현하시겠어요?',                     en:'On a scale of 0 to 10 how would you rate the discomfort' },
+  { ch:'Ch 02 라운딩', ko:'말씀해 주셔서 감사합니다. 바로 의사에게 보고하겠습니다.',               en:'Thank you for telling me I will inform the doctor right away' },
+  { ch:'Ch 02 라운딩', ko:'잘 주무셨나요?',                                                    en:'Did you sleep well' },
+  { ch:'Ch 02 라운딩', ko:'오늘 식사는 잘 하셨나요?',                                           en:'Were you able to eat your meals today' },
+
+  // ── Ch 03 통증 ───────────────────────────────────────────────────
+  { ch:'Ch 03 통증', ko:'지금 통증이 있으신가요?',                                              en:'Are you in any pain right now' },
+  { ch:'Ch 03 통증', ko:'언제 시작됐나요? 갑자기 시작됐나요, 서서히 생겼나요?',                   en:'When did it start was it sudden or gradual' },
+  { ch:'Ch 03 통증', ko:'나아지거나 악화되는 요소가 있나요?',                                    en:'Does anything make it better or worse' },
+  { ch:'Ch 03 통증', ko:'통증이 팔, 턱, 등으로 퍼지나요?',                                      en:'Does the pain spread to your arm jaw or back' },
+  { ch:'Ch 03 통증', ko:'통증이 둔한가요, 날카롭나요, 화끈거리나요?',                             en:'Is the pain dull sharp or burning' },
+  { ch:'Ch 03 통증', ko:'진통제를 투여하겠습니다. 조금만 기다려 주세요.',                         en:'I will give you a pain reliever please wait a moment' },
+  { ch:'Ch 03 통증', ko:'심전도 모니터를 연결하고 즉시 의사를 호출하겠습니다.',                    en:'I will connect you to the cardiac monitor and call the doctor immediately' },
+  { ch:'Ch 03 통증', ko:'진정하시고 천천히 호흡해 주세요. 제가 여기 있겠습니다.',                  en:'Please try to stay calm and breathe slowly I am right here with you' },
+
+  // ── Ch 04 심장 증상 ──────────────────────────────────────────────
+  { ch:'Ch 04 심장증상', ko:'심장이 평소보다 빠르게 뛰거나 불규칙하게 뛰는 것을 느끼셨나요?',      en:'Have you noticed your heart beating faster than usual or irregularly' },
+  { ch:'Ch 04 심장증상', ko:'심장이 두근거리거나 퍼덕이는 느낌이 드시나요?',                       en:'Do you feel your heart pounding or fluttering' },
+  { ch:'Ch 04 심장증상', ko:'한 번 그럴 때 보통 얼마나 지속되나요?',                              en:'How long does an episode usually last' },
+  { ch:'Ch 04 심장증상', ko:'쉬고 있을 때도 생기나요, 아니면 활동할 때만 생기나요?',               en:'Does it happen when you are resting or only during activity' },
+  { ch:'Ch 04 심장증상', ko:'호흡에 어려움이 있으신가요?',                                       en:'Are you having any trouble breathing' },
+  { ch:'Ch 04 심장증상', ko:'누웠을 때 숨이 차나요?',                                            en:'Do you feel breathless when lying flat' },
+  { ch:'Ch 04 심장증상', ko:'침대 머리를 올려드리고 산소를 공급하겠습니다.',                       en:'I will raise the head of your bed and give you some oxygen' },
+  { ch:'Ch 04 심장증상', ko:'다리, 발목, 발에 부기가 있으신가요?',                               en:'Have you noticed any swelling in your legs ankles or feet' },
+  { ch:'Ch 04 심장증상', ko:'최근에 어지럼증이나 실신을 경험하셨나요?',                            en:'Have you felt dizzy or fainted recently' },
+  { ch:'Ch 04 심장증상', ko:'최근에 체중이 갑자기 늘었나요?',                                    en:'Have you gained weight suddenly recently' },
+
+  // ── Ch 05 검사 안내 ──────────────────────────────────────────────
+  { ch:'Ch 05 검사', ko:'오늘 검사가 처방되었습니다. 설명드리겠습니다.',                           en:'The doctor has ordered some tests for you today I would like to explain them' },
+  { ch:'Ch 05 검사', ko:'혈액 검사를 위해 채혈이 필요합니다.',                                    en:'We need to draw some blood for lab work' },
+  { ch:'Ch 05 검사', ko:'오늘 아침에 드신 것이 있나요?',                                         en:'Have you eaten anything this morning' },
+  { ch:'Ch 05 검사', ko:'검사 전 금속 액세서리는 모두 빼주시기 바랍니다.',                         en:'Please take off any metal jewelry or accessories before the test' },
+  { ch:'Ch 05 검사', ko:'전혀 아프지 않으며 약 5분이면 됩니다.',                                  en:'It is completely painless and only takes about 5 minutes' },
+  { ch:'Ch 05 검사', ko:'가슴, 팔, 다리에 전극 패드를 붙이겠습니다.',                             en:'I will place some sticky patches on your chest arms and legs' },
+  { ch:'Ch 05 검사', ko:'가만히 누워서 평소처럼 숨을 쉬세요. 기록하는 동안 말씀하지 마세요.',       en:'Please lie still and breathe normally do not talk during the recording' },
+  { ch:'Ch 05 검사', ko:'이것은 심장의 전기적 활동을 기록하는 검사입니다.',                        en:'This records the electrical activity of your heart' },
+  { ch:'Ch 05 검사', ko:'비침습적이며 완전히 안전한 검사입니다.',                                  en:'It is non-invasive and completely safe' },
+
+  // ── Ch 06 금식 ───────────────────────────────────────────────────
+  { ch:'Ch 06 금식', ko:'오늘 자정부터 금식이 필요합니다.',                                       en:'You will need to fast from midnight tonight' },
+  { ch:'Ch 06 금식', ko:'자정 이후에는 음식도 물도 드시면 안 됩니다.',                             en:'No food or water after 12 AM' },
+  { ch:'Ch 06 금식', ko:'물, 사탕, 껌을 포함하여 아무것도 드시거나 마시면 안 됩니다.',             en:'Please do not eat or drink anything including water candy or chewing gum' },
+  { ch:'Ch 06 금식', ko:'내일 아침 시술이 예정되어 있어 위장이 비어 있어야 합니다.',               en:'You are scheduled for a procedure tomorrow morning that requires an empty stomach' },
+  { ch:'Ch 06 금식', ko:'일부 약은 소량의 물과 함께 복용 가능합니다.',                             en:'Some medications may be allowed with a tiny sip of water' },
+  { ch:'Ch 06 금식', ko:'수분 과부하를 예방하기 위해 하루 1.5리터로 수분 섭취를 제한해 주세요.',   en:'Please limit fluids to 1.5 liters per day to prevent fluid overload' },
+
+  // ── Ch 07 투약 ───────────────────────────────────────────────────
+  { ch:'Ch 07 투약', ko:'약 드실 시간입니다. 각 약의 용도를 설명드리겠습니다.',                    en:'It is time for your medications I will explain what each one is for' },
+  { ch:'Ch 07 투약', ko:'이 흰 알약은 아스피린입니다. 혈전 예방에 도움을 줍니다.',                  en:'This white tablet is aspirin it helps prevent blood clots' },
+  { ch:'Ch 07 투약', ko:'이것은 베타차단제입니다. 심박수를 낮추고 혈압을 내립니다.',                en:'This is a beta-blocker it slows your heart rate and lowers blood pressure' },
+  { ch:'Ch 07 투약', ko:'이것은 이뇨제입니다. 체내 과잉 수분을 제거하는 데 도움을 줍니다.',        en:'This is a diuretic it helps remove excess fluid from your body' },
+  { ch:'Ch 07 투약', ko:'이 약을 복용한 후 특이한 증상이 있으셨나요?',                             en:'Have you had any unusual symptoms since starting these medications' },
+  { ch:'Ch 07 주사', ko:'정맥주사를 삽입하겠습니다. 혈관에 작은 바늘을 넣겠습니다.',               en:'I need to start an IV line I will insert a small needle into your vein' },
+  { ch:'Ch 07 주사', ko:'약간 따끔할 수 있습니다. 움직이지 마세요.',                               en:'You may feel a small pinch please hold still' },
+  { ch:'Ch 07 주사', ko:'주사 부위에 화끈거림, 부종, 통증이 있으면 알려주세요.',                   en:'Please let me know if you feel any burning swelling or pain around the IV site' },
+
+  // ── Ch 08 배뇨·배변 ──────────────────────────────────────────────
+  { ch:'Ch 08 배뇨·배변', ko:'오늘 소변을 보셨나요? 몇 번이나 보셨나요?',                         en:'Have you been able to urinate today how many times' },
+  { ch:'Ch 08 배뇨·배변', ko:'소변 색깔이나 양에 변화가 있으셨나요?',                              en:'Did you notice any change in the color or amount of urine' },
+  { ch:'Ch 08 배뇨·배변', ko:'소변을 볼 때 통증이나 화끈거림이 있으신가요?',                       en:'Do you feel any pain or burning when you urinate' },
+  { ch:'Ch 08 배뇨·배변', ko:'지금부터 소변량을 측정하겠습니다.',                                  en:'I will measure your urine output from now on' },
+  { ch:'Ch 08 배뇨·배변', ko:'오늘 대변을 보셨나요?',                                             en:'Have you had a bowel movement today' },
+  { ch:'Ch 08 배뇨·배변', ko:'마지막으로 대변을 보신 게 언제였나요?',                              en:'When was your last bowel movement' },
+  { ch:'Ch 08 배뇨·배변', ko:'복부 팽만감이나 불편함이 있으신가요?',                               en:'Do you feel any abdominal bloating or discomfort' },
+  { ch:'Ch 08 배뇨·배변', ko:'의사에게 보고하고 변비약 처방을 검토하겠습니다.',                     en:'I will report this to the doctor and we may order a mild laxative for you' },
+
+  // ── Ch 09 시술후 ─────────────────────────────────────────────────
+  { ch:'Ch 09 시술후', ko:'시술 후 관리에 대해 설명드리겠습니다.',                                 en:'I will explain the post-procedure care' },
+  { ch:'Ch 09 시술후', ko:'다리를 펴고 4시간 동안 구부리지 마세요.',                               en:'Please keep your leg straight and do not bend it for the next 4 hours' },
+  { ch:'Ch 09 시술후', ko:'천자 부위에서 출혈 위험이 있습니다. 자주 확인하겠습니다.',               en:'There is a risk of bleeding at the puncture site I will check it frequently' },
+  { ch:'Ch 09 시술후', ko:'사타구니에서 출혈, 부종, 열감이 생기면 강하게 눌러주시고 즉시 저를 불러주세요.', en:'If you notice any bleeding swelling or warmth at the groin press firmly and call me immediately' },
+  { ch:'Ch 09 시술후', ko:'조영제를 배출하기 위해 물을 충분히 드세요.',                            en:'Please drink plenty of fluids to flush the contrast dye out of your kidneys' },
+  { ch:'Ch 09 시술후', ko:'항응고제를 복용 중이므로 넘어지지 않도록 각별히 주의해 주세요.',          en:'Because you are on blood thinners please be very careful not to fall' },
+  { ch:'Ch 09 시술후', ko:'밤 동안 지속적으로 심장 리듬을 모니터하겠습니다.',                       en:'I will be checking your heart rhythm on the monitor throughout the night' },
+
+  // ── Ch 10 퇴원 ───────────────────────────────────────────────────
+  { ch:'Ch 10 퇴원', ko:'오늘 퇴원하시게 되었습니다! 퇴원 교육을 진행하겠습니다.',                  en:'You are being discharged today let me go through your discharge instructions' },
+  { ch:'Ch 10 퇴원', ko:'처방된 모든 약을 계속 복용해 주세요.',                                    en:'Please continue taking all your medications as prescribed' },
+  { ch:'Ch 10 퇴원', ko:'의사와 상담 없이 약을 임의로 중단하지 마세요.',                            en:'Do not stop any medication without consulting your doctor' },
+  { ch:'Ch 10 퇴원', ko:'집에서 매일 혈압과 맥박을 측정하세요.',                                   en:'Monitor your blood pressure and heart rate at home daily' },
+  { ch:'Ch 10 퇴원', ko:'기록을 유지하고 다음 진료 시 가져오세요.',                                 en:'Keep a log and bring it to your next appointment' },
+  { ch:'Ch 10 퇴원', ko:'2주 후 외래 예약이 되어 있습니다.',                                       en:'Your follow-up appointment is scheduled for two weeks from today' },
+  { ch:'Ch 10 퇴원', ko:'퇴원 전에 필요한 서류가 있으신가요?',                                     en:'Do you need any documents before you leave' },
+  { ch:'Ch 10 퇴원', ko:'진단서는 1층 의무기록실에서 신청하실 수 있습니다.',                        en:'A medical certificate can be requested at the medical records office on the first floor' },
+  { ch:'Ch 10 퇴원', ko:'퇴원 요약지는 오늘 드리겠습니다.',                                        en:'The discharge summary will be given to you today' },
+  { ch:'Ch 10 퇴원', ko:'퇴원 전에 궁금한 점이 있으신가요?',                                       en:'Do you have any questions before you go home' },
+
+  // ── Appendix 핵심표현 ─────────────────────────────────────────────
+  { ch:'Appendix 핵심표현', ko:'즉시 의사를 호출하겠습니다.',                                      en:'I will call the doctor right away' },
+  { ch:'Appendix 핵심표현', ko:'제가 여기 있겠습니다. 혼자가 아니에요.',                            en:'I am right here with you you are not alone' },
+  { ch:'Appendix 핵심표현', ko:'걱정하지 마세요. 저희가 돕겠습니다.',                               en:'Please do not worry we are here to help you' },
+  { ch:'Appendix 핵심표현', ko:'잘 하고 계세요. 조금만 더요.',                                     en:'You are doing great just a little longer' },
+  { ch:'Appendix 핵심표현', ko:'진행 전에 동의가 필요합니다.',                                      en:'I need your consent before we proceed' },
+  { ch:'Appendix 핵심표현', ko:'의사가 이 약을 처방했습니다.',                                      en:'The doctor has ordered this medication for you' },
+  { ch:'Appendix 핵심표현', ko:'시작 전 궁금한 점 있으신가요?',                                    en:'Do you have any questions before we start' },
+  { ch:'Appendix 핵심표현', ko:'언제든지 편하게 질문하세요.',                                       en:'Please feel free to ask me anything at any time' },
+  { ch:'Appendix 핵심표현', ko:'설명드린 내용 모두 이해하셨나요?',                                  en:'Did you understand everything I explained' },
+  { ch:'Appendix 핵심표현', ko:'갑작스러운 심한 흉통이 있으면 즉시 응급실에 가세요.',               en:'If you have sudden severe chest pain please go to the emergency room immediately' },
+  { ch:'Appendix 핵심표현', ko:'어떤 기분인지 이해합니다. 정말 힘드시겠어요.',                      en:'I understand how you feel it must be very difficult' },
+  { ch:'Appendix 핵심표현', ko:'새로운 흉통, 호흡 곤란이 있으면 즉시 말씀해 주세요.',              en:'Please report any new chest pain or shortness of breath immediately' },
+];
+
+const CHAPTERS = [...new Set(ALL_QS.map(q => q.ch))];
+
+let selectedChapters = new Set(CHAPTERS);
+let questions = [];
+let current = 0;
+let score = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let streak = 0;
+let answered = false;
+let userAnswer = [];
+let shuffledWords = [];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ── start screen ──────────────────────────────────────────────────
+function showStartScreen() {
+  document.getElementById('start-view').style.display = '';
+  document.getElementById('quiz-view').style.display = 'none';
+  document.getElementById('finish-view').style.display = 'none';
+  renderFilters();
+  updateCountNote();
+}
+
+function renderFilters() {
+  const row = document.getElementById('filter-row');
+  row.innerHTML = '';
+  // All chip
+  const allChip = document.createElement('span');
+  allChip.className = 'filter-chip' + (selectedChapters.size === CHAPTERS.length ? ' active' : '');
+  allChip.textContent = '전체';
+  allChip.onclick = () => {
+    if (selectedChapters.size === CHAPTERS.length) {
+      selectedChapters.clear();
+    } else {
+      CHAPTERS.forEach(c => selectedChapters.add(c));
+    }
+    renderFilters(); updateCountNote();
+  };
+  row.appendChild(allChip);
+  CHAPTERS.forEach(ch => {
+    const chip = document.createElement('span');
+    chip.className = 'filter-chip' + (selectedChapters.has(ch) ? ' active' : '');
+    chip.textContent = ch;
+    chip.onclick = () => {
+      if (selectedChapters.has(ch)) selectedChapters.delete(ch);
+      else selectedChapters.add(ch);
+      renderFilters(); updateCountNote();
+    };
+    row.appendChild(chip);
+  });
+}
+
+function updateCountNote() {
+  const pool = ALL_QS.filter(q => selectedChapters.has(q.ch));
+  const n = document.getElementById('count-note');
+  n.innerHTML = `선택된 챕터의 문제 수: <strong>${pool.length}개</strong> — 랜덤 10문제가 출제됩니다.`;
+}
+
+function startQuiz() {
+  const pool = ALL_QS.filter(q => selectedChapters.has(q.ch));
+  if (pool.length === 0) { alert('챕터를 하나 이상 선택해 주세요.'); return; }
+  questions = shuffle(pool).slice(0, 10);
+  current = 0; score = 0; correctCount = 0; wrongCount = 0; streak = 0;
+  document.getElementById('start-view').style.display = 'none';
+  document.getElementById('quiz-view').style.display = '';
+  document.getElementById('finish-view').style.display = 'none';
+  loadQ();
+}
+
+function goToStart() { showStartScreen(); }
+function restartSame() { startQuiz(); }
+
+// ── quiz logic ────────────────────────────────────────────────────
+function loadQ() {
+  answered = false;
+  userAnswer = [];
+  const q = questions[current];
+  const total = questions.length;
+
+  document.getElementById('q-num').textContent = current + 1;
+  document.getElementById('q-total').textContent = total;
+  document.getElementById('chapter-badge').textContent = q.ch;
+  document.getElementById('q-korean').textContent = q.ko;
+  document.getElementById('score-disp').textContent = score;
+  document.getElementById('correct-disp').textContent = correctCount;
+  document.getElementById('wrong-disp').textContent = wrongCount;
+  document.getElementById('prog-bar').style.width = ((current / total) * 100) + '%';
+
+  // update streak badge
+  const sb = document.getElementById('streak-badge');
+  if (streak >= 2) {
+    sb.classList.add('show');
+    document.getElementById('streak-num').textContent = streak;
+  } else { sb.classList.remove('show'); }
+
+  // tokenise answer — strip punctuation
+  const words = q.en.replace(/[?!,.']/g, '').split(/\s+/).filter(Boolean);
+  shuffledWords = shuffle([...words]);
+
+  renderAnswerZone();
+  renderWordBank();
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+  fb.innerHTML = '';
+  document.getElementById('btn-check').style.display = '';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('answer-zone').className = 'answer-zone';
+}
+
+function renderAnswerZone() {
+  const zone = document.getElementById('answer-zone');
+  zone.innerHTML = '';
+  if (userAnswer.length === 0) {
+    zone.innerHTML = '<span class="answer-zone-hint">↓ 아래 단어를 순서대로 클릭하세요</span>';
+    return;
+  }
+  userAnswer.forEach((word, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'answer-chip';
+    chip.textContent = word;
+    chip.title = '클릭하면 되돌아갑니다';
+    chip.onclick = () => { if (!answered) removeWord(i); };
+    zone.appendChild(chip);
+  });
+}
+
+function renderWordBank() {
+  const bank = document.getElementById('word-bank');
+  bank.innerHTML = '';
+  shuffledWords.forEach((word, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'word-chip';
+    chip.id = 'wc-' + i;
+    chip.textContent = word;
+    chip.onclick = () => addWord(word, i);
+    bank.appendChild(chip);
+  });
+}
+
+function addWord(word, idx) {
+  if (answered) return;
+  userAnswer.push(word);
+  const el = document.getElementById('wc-' + idx);
+  if (el) el.classList.add('used');
+  renderAnswerZone();
+}
+
+function removeWord(idx) {
+  const word = userAnswer[idx];
+  userAnswer.splice(idx, 1);
+  // un-use the first matching chip
+  const chips = document.querySelectorAll('.word-chip');
+  for (const chip of chips) {
+    if (chip.textContent === word && chip.classList.contains('used')) {
+      chip.classList.remove('used'); break;
+    }
+  }
+  renderAnswerZone();
+}
+
+function resetAnswer() {
+  if (answered) return;
+  userAnswer = [];
+  document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('used'));
+  renderAnswerZone();
+}
+
+function checkAnswer() {
+  if (answered || userAnswer.length === 0) return;
+  answered = true;
+
+  const q = questions[current];
+  const correct = q.en.replace(/[?!,.']/g, '').toLowerCase().split(/\s+/).filter(Boolean);
+  const user = userAnswer.map(w => w.toLowerCase());
+  const isCorrect = JSON.stringify(correct) === JSON.stringify(user);
+
+  const zone = document.getElementById('answer-zone');
+  const fb = document.getElementById('feedback');
+
+  if (isCorrect) {
+    score += 10;
+    correctCount++;
+    streak++;
+    zone.className = 'answer-zone correct';
+    fb.className = 'feedback show-correct';
+    fb.innerHTML = '정답입니다! ✓<span class="answer-text">' + q.en + '</span>';
+  } else {
+    wrongCount++;
+    streak = 0;
+    zone.className = 'answer-zone wrong';
+    fb.className = 'feedback show-wrong';
+    fb.innerHTML = '아쉽네요. 다시 봐요!<span class="answer-text">정답: ' + q.en + '</span>';
+  }
+
+  document.getElementById('score-disp').textContent = score;
+  document.getElementById('correct-disp').textContent = correctCount;
+  document.getElementById('wrong-disp').textContent = wrongCount;
+
+  // streak badge live update
+  const sb = document.getElementById('streak-badge');
+  if (streak >= 2) { sb.classList.add('show'); document.getElementById('streak-num').textContent = streak; }
+  else sb.classList.remove('show');
+
+  document.getElementById('btn-check').style.display = 'none';
+  document.getElementById('btn-next').style.display = '';
+}
+
+function nextQ() {
+  current++;
+  if (current >= questions.length) { showFinish(); return; }
+  loadQ();
+}
+
+function showFinish() {
+  document.getElementById('quiz-view').style.display = 'none';
+  document.getElementById('finish-view').style.display = '';
+  const total = questions.length;
+  const pct = Math.round((correctCount / total) * 100);
+
+  document.getElementById('final-score').textContent = correctCount + ' / ' + total;
+  document.getElementById('res-correct').textContent = correctCount;
+  document.getElementById('res-wrong').textContent = wrongCount;
+  setTimeout(() => { document.getElementById('score-bar').style.width = pct + '%'; }, 100);
+
+  let icon, msg;
+  if (pct === 100) { icon = '🏆'; msg = '완벽해요! 어떤 환자가 와도 자신 있게 말할 수 있어요!'; }
+  else if (pct >= 80) { icon = '⭐'; msg = '훌륭해요! 조금만 더 연습하면 완벽해질 거예요.'; }
+  else if (pct >= 60) { icon = '👍'; msg = '잘 하셨어요. 틀린 문장을 교육 책자에서 복습해 보세요.'; }
+  else if (pct >= 40) { icon = '📖'; msg = '더 연습이 필요해요. 해당 챕터를 다시 공부해 보세요!'; }
+  else              { icon = '💪'; msg = '괜찮아요! 반복 학습이 최고예요. 다시 도전해 봐요!'; }
+
+  document.getElementById('finish-icon').textContent = icon;
+  document.getElementById('finish-msg').textContent = msg;
+  document.getElementById('prog-bar').style.width = '100%';
+}
+
+// ── init ──────────────────────────────────────────────────────────
+showStartScreen();
+</script>
+</body>
+</html>
